@@ -76,5 +76,13 @@ export default function QueryProcessor(query: string): string {
       return sum.toString();
   }
 
+  const powerMatch = query.toLowerCase().match(/what is (\d+) to the power of (\d+)\?/);
+  if (powerMatch) {
+      const base = parseInt(powerMatch[1], 10);
+      const exponent = parseInt(powerMatch[2], 10);
+      const result = Math.pow(base, exponent);
+      return result.toString();
+  }
+
   return "";
 }
