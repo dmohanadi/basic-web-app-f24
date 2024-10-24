@@ -49,6 +49,25 @@ export default function QueryProcessor(query: string): string {
       }
       return "None";
   }
+  const minusMatch = query.toLowerCase().match(/what is (\d+) minus (\d+)\?/);
+  if (minusMatch) {
+      const num1 = parseInt(minusMatch[1], 10);
+      const num2 = parseInt(minusMatch[2], 10);
+      return (num1 - num2).toString();
+  }
+
+  const primeMatch = query.toLowerCase().match(/which of the following numbers are primes: ([\d, ]+)\?/);
+  if (primeMatch) {
+      const numbers = primeMatch[1].split(',').map(num => parseInt(num.trim(), 10));
+      const primes = numbers.filter(num => {
+          if (num <= 1) return false;
+          for (let i = 2; i <= Math.sqrt(num); i++) {
+              if (num % i === 0) return false;
+          }
+          return true;
+      });
+      return primes.length > 0 ? primes.join(', ') : "None";
+  }
 
   return "";
 }
