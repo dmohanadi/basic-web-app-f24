@@ -101,5 +101,21 @@ export default function QueryProcessor(query: string): string {
       const result = (num1 * num2) + num3;
       return result.toString();
   }
+
+  const anagramMatch = query.toLowerCase().match(/which of the following is an anagram of (\w+): ([\w, ]+)\?/);
+  if (anagramMatch) {
+      const word = anagramMatch[1];
+      const candidates = anagramMatch[2].split(',').map(w => w.trim());
+      
+      const sortedWord = word.split('').sort().join('');
+      for (const candidate of candidates) {
+          if (candidate.split('').sort().join('') === sortedWord) {
+              return candidate;
+          }
+      }
+      return "None";
+  }
+
+
   return "";
 }
