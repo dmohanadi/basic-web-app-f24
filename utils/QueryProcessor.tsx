@@ -28,7 +28,14 @@ export default function QueryProcessor(query: string): string {
     const numbers = largestMatch[1].split(',').map(num => parseInt(num.trim(), 10));
     const largestNumber = Math.max(...numbers);
     return largestNumber.toString();
-}
+  }
+
+  const multiplyMatch = query.toLowerCase().match(/what is (\d+) multiplied by (\d+)\?/);
+  if (multiplyMatch) {
+      const num1 = parseInt(multiplyMatch[1], 10);
+      const num2 = parseInt(multiplyMatch[2], 10);
+      return (num1 * num2).toString();
+  }
 
   return "";
 }
