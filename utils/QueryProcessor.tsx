@@ -13,9 +13,16 @@ export default function QueryProcessor(query: string): string {
     return ( "dmohanadi" );
   }
   if (query.toLowerCase().includes("what is your name?")) {
-    //TODO add your Andrew ID below
-    //TODO update the corresponding test case in __tests__
     return ( "deema" );
+  }
+
+  if (query.toLowerCase().includes("what is (\d+) plus (\d+)")) {
+    const match = query.toLowerCase().match(/what is (\d+) plus (\d+)/);
+    if (match) {
+        const num1 = parseInt(match[1], 10);
+        const num2 = parseInt(match[2], 10);
+        return (num1 + num2).toString();
+    }
   }
   return "";
 }
