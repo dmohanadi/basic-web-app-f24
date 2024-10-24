@@ -37,5 +37,18 @@ export default function QueryProcessor(query: string): string {
       return (num1 * num2).toString();
   }
 
+  const squareCubeMatch = query.toLowerCase().match(/which of the following numbers is both a square and a cube: ([\d, ]+)\?/);
+  if (squareCubeMatch) {
+      const numbers = squareCubeMatch[1].split(',').map(num => parseInt(num.trim(), 10));
+      for (const num of numbers) {
+          const sqrt = Math.sqrt(num);
+          const cbrt = Math.cbrt(num);
+          if (Number.isInteger(sqrt) && Number.isInteger(cbrt)) {
+              return num.toString();
+          }
+      }
+      return "None";
+  }
+
   return "";
 }
