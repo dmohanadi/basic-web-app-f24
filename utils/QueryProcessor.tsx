@@ -69,5 +69,12 @@ export default function QueryProcessor(query: string): string {
       return primes.length > 0 ? primes.join(', ') : "None";
   }
 
+  const sumMatch = query.toLowerCase().match(/what is ((?:\d+ plus )+\d+)\?/);
+  if (sumMatch) {
+      const numbers = sumMatch[1].split(' plus ').map(num => parseInt(num.trim(), 10));
+      const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+      return sum.toString();
+  }
+
   return "";
 }
