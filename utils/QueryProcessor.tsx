@@ -16,12 +16,19 @@ export default function QueryProcessor(query: string): string {
     return ( "deema" );
   }
 
-  const match = query.toLowerCase().match(/what is (\d+) plus (\d+)/);
+  const match = query.toLowerCase().match(/what is (\d+) plus (\d+)\?/);
   if (match) {
       const num1 = parseInt(match[1], 10);
       const num2 = parseInt(match[2], 10);
-        return (num1 + num2).toString();
+      return (num1 + num2).toString();
   }
+
+  const largestMatch = query.toLowerCase().match(/which of the following numbers is the largest: ([\d, ]+)\?/);
+  if (largestMatch) {
+    const numbers = largestMatch[1].split(',').map(num => parseInt(num.trim(), 10));
+    const largestNumber = Math.max(...numbers);
+    return largestNumber.toString();
+}
 
   return "";
 }
