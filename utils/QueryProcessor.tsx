@@ -16,13 +16,12 @@ export default function QueryProcessor(query: string): string {
     return ( "deema" );
   }
 
-  if (query.toLowerCase().includes("what is (\d+) plus (\d+)")) {
-    const match = query.toLowerCase().match(/what is (\d+) plus (\d+)/);
-    if (match) {
-        const num1 = parseInt(match[1], 10);
-        const num2 = parseInt(match[2], 10);
+  const match = query.toLowerCase().match(/what is (\d+) plus (\d+)/);
+  if (match) {
+      const num1 = parseInt(match[1], 10);
+      const num2 = parseInt(match[2], 10);
         return (num1 + num2).toString();
-    }
   }
+
   return "";
 }
