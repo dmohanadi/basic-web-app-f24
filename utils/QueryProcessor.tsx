@@ -92,5 +92,14 @@ export default function QueryProcessor(query: string): string {
       const result = num1 + (num2 * num3);
       return result.toString();
   }
+
+  const multiplyAddMatch = query.toLowerCase().match(/what is (\d+) multiplied by (\d+) plus (\d+)\?/);
+  if (multiplyAddMatch) {
+      const num1 = parseInt(multiplyAddMatch[1], 10);
+      const num2 = parseInt(multiplyAddMatch[2], 10);
+      const num3 = parseInt(multiplyAddMatch[3], 10);
+      const result = (num1 * num2) + num3;
+      return result.toString();
+  }
   return "";
 }
